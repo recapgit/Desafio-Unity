@@ -32,7 +32,7 @@ public class MapController : MonoBehaviour
         ChunkChecker();
     }
 
-    // Chunk = 28 tiles (quadrados)
+    // Chunk = 20 tiles (quadrados)
     // função pra checar o spawn de chunks no mapa
 
     void ChunkChecker()

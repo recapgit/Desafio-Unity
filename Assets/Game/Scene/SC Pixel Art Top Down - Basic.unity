@@ -336,9 +336,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 10
+  m_SortingLayerID: -769469303
+  m_SortingLayer: 3
+  m_SortingOrder: 20
   m_Sprite: {fileID: 971091181, guid: 9c87645f6fe961447a28386c91cbf99b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -364,6 +364,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 352568313}
+  - {fileID: 1172045947}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &585814609
@@ -566,6 +567,51 @@ LightingSettings:
   m_PVRTiledBaking: 0
   m_NumRaysToShootPerTexel: -1
   m_RespectSceneVisibilityWhenBakingGI: 0
+--- !u!1 &1172045946
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1172045947}
+  - component: {fileID: 1172045948}
+  m_Layer: 0
+  m_Name: Garlic Controller
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1172045947
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1172045946}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 585814608}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1172045948
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1172045946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d7d46bf0371a7f4b8c0f52222b33a6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponData: {fileID: 11400000, guid: 71e6eedddcb085647be3418c30d124c6, type: 2}
 --- !u!1 &1352916036
 GameObject:
   m_ObjectHideFlags: 0
@@ -607,7 +653,11 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   currentChunk: {fileID: 0}
-  spawnedChunks: []
+  spawnedChunks:
+  - {fileID: 4346944784625823894, guid: fa60743236573f24aaa29937fd459115, type: 3}
+  - {fileID: 4346944784625823894, guid: 57e53b3e684832f43a94c023597a426d, type: 3}
+  - {fileID: 4346944784625823894, guid: d5da220ce5665794ebed7ab9b5afc0b1, type: 3}
+  - {fileID: 4346944784625823894, guid: 67168e5c2e30033478037a286bc0b858, type: 3}
   maxOpDist: 50
   optimizerCooldownDuration: 1
 --- !u!4 &1352916038
@@ -655,25 +705,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waves:
-  - waveName: Wave 1
+  - waveName: 
     enemyGroups:
-    - enemyName: Red Bat
-      enemyCount: 10
+    - enemyName: Bat
+      enemyCount: 4
       spawnCount: 0
       enemyPrefab: {fileID: 949838582628969972, guid: c3973fe465f3ad340ac38417733e79ad,
         type: 3}
-    waveQuota: 10
-    spawnInterval: 2.5
-    spawnCount: 0
-  - waveName: Wave 1
-    enemyGroups:
-    - enemyName: Red Bat
-      enemyCount: 5
-      spawnCount: 0
-      enemyPrefab: {fileID: 949838582628969972, guid: 60c9986d3b8c9bb43857844957c6c1bf,
-        type: 3}
     waveQuota: 0
-    spawnInterval: 2
+    spawnInterval: 4
     spawnCount: 0
   currentWaveCount: 0
   enemiesAlive: 0
@@ -707,13 +747,19 @@ PrefabInstance:
     - target: {fileID: 1654846555814810480, guid: fdb9518061aa5504fa255c6561b8d0cb,
         type: 3}
       propertyPath: m_Size.x
-      value: 25
+      value: 24
       objectReference: {fileID: 0}
     - target: {fileID: 1654846555814810480, guid: fdb9518061aa5504fa255c6561b8d0cb,
         type: 3}
       propertyPath: m_Size.y
-      value: 25
+      value: 24
       objectReference: {fileID: 0}
+    - target: {fileID: 1886184125968075359, guid: fdb9518061aa5504fa255c6561b8d0cb,
+        type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 7148428337604731935, guid: 0000000000000000d000000000000000,
+        type: 0}
     - target: {fileID: 2235021505523341626, guid: fdb9518061aa5504fa255c6561b8d0cb,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -768,6 +814,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Terrain Chunk
+      objectReference: {fileID: 0}
+    - target: {fileID: 9182325926880505679, guid: fdb9518061aa5504fa255c6561b8d0cb,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 28
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
