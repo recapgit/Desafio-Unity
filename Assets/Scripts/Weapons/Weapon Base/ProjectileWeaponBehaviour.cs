@@ -32,6 +32,7 @@ public class ProjectileWeaponBehaviour : MonoBehaviour
         Destroy(gameObject, destroyAfterSeconds);
     }
 
+    //transformar (rotacionar/orientar para a direção certa). Como o padrão já é pra direita só é preciso mudar para o resto
     public void DirectionChecker(Vector3 dir)
     {
         direction = dir;
@@ -41,34 +42,34 @@ public class ProjectileWeaponBehaviour : MonoBehaviour
         Vector3 scale = transform.localScale;
         Vector3 rotation = transform.rotation.eulerAngles;
 
-        if (dirx < 0 && diry == 0) //left
+        if (dirx < 0 && diry == 0) //esq
         {
             scale.x = scale.x * -1;
             scale.y = scale.y * -1;
         }
-        else if (dirx == 0 && diry < 0) //down
+        else if (dirx == 0 && diry < 0) //baixo
         {
             scale.y = scale.y * -1;
         }
-        else if (dirx == 0 && diry > 0) //up
+        else if (dirx == 0 && diry > 0) //cima
         {
             scale.x = scale.x * -1;
         }
-        else if (dirx > 0 && diry > 0) //right up
+        else if (dirx > 0 && diry > 0) //dir cima
         {
             rotation.z = 0f;
         }
-        else if (dirx > 0 && diry < 0) //right down
+        else if (dirx > 0 && diry < 0) //dir baixo
         {
             rotation.z = -90f;
         }
-        else if (dirx < 0 && diry > 0) //left up
+        else if (dirx < 0 && diry > 0) //esq cima
         {
             scale.x = scale.x * -1;
             scale.y = scale.y * -1;
             rotation.z = -90f;
         }
-        else if (dirx < 0 && diry < 0) //left down
+        else if (dirx < 0 && diry < 0) //esq baixo
         {
             scale.x = scale.x * -1;
             scale.y = scale.y * -1;
