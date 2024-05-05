@@ -5,14 +5,15 @@ using UnityEngine.PlayerLoop;
 
 public class PlayerStats : MonoBehaviour
 {
-    public CharacterScriptableObject characterData;
+    CharacterScriptableObject characterData;
 
     //Atributos durante o jogo
-    float currentHealth;
-    float currentRecovery;
-    float currentMoveSpeed;
-    float currentMight;
-    float currentProjectileSpeed;
+    public float currentHealth;
+    public float currentRecovery;
+    public float currentMoveSpeed;
+    public float currentMight;
+    public float currentProjectileSpeed;
+    public float currentMagnet;
 
     //I-frames
     [Header("I-Frames")]
@@ -40,12 +41,16 @@ public class PlayerStats : MonoBehaviour
 
 
     void Awake()
-    {
+    {   
+        characterData = CharacterSelector.GetData();
+        CharacterSelector.instancia.DestroyGameInstance();
+
         currentHealth = characterData.MaxHealth;
         currentRecovery = characterData.Recovery;
         currentMoveSpeed = characterData.MoveSpeed;
         currentMight = characterData.Might;
         currentProjectileSpeed = characterData.ProjectileSpeed;
+        currentMagnet = characterData.Magnet;
     }
 
 
@@ -95,6 +100,8 @@ public class PlayerStats : MonoBehaviour
         {
             isInvincible = false;
         }
+
+        Recover();
     }
 
     public void TakeDamage(float dmg)
@@ -113,8 +120,33 @@ public class PlayerStats : MonoBehaviour
         }
     }
 
+    public void RestoreHealth(float amount)
+    {
+        if (currentHealth < characterData.MaxHealth)
+        {
+            currentHealth += amount;
+            if(currentHealth > characterData.MaxHealth)
+            {
+                currentHealth = characterData.MaxHealth;
+            }
+        }
+    }
+
     public void Kill()
     {
         Debug.Log("Morreu");
+    }
+
+    void Recover()
+    {
+        if (currentHealth < characterData.MaxHealth)
+        {
+            currentHealth += currentRecovery * Time.deltaTime;
+
+            if(currentHealth > characterData.MaxHealth)
+            {
+                currentHealth = characterData.MaxHealth;
+            }
+        }
     }
 }

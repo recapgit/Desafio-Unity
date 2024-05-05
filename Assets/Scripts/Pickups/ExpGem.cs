@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ExpGem : MonoBehaviour, ICollectible
+public class ExpGem : Pickup, ICollectible
 {
     public int expFornecida;
 
@@ -10,18 +10,6 @@ public class ExpGem : MonoBehaviour, ICollectible
     {
         PlayerStats player = FindObjectOfType<PlayerStats>();
         player.AumentarExp(expFornecida);
-        Destroy(gameObject);
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        //Destroy(gameObject);
     }
 }
