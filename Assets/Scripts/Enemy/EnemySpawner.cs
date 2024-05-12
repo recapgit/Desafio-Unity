@@ -35,9 +35,8 @@ public class EnemySpawner : MonoBehaviour
     public int maxEnemiesAllowed;                //limite de inimigos no mapa
     public bool maxEnemiesReached = false;
     public float waveInterval;                  //timer entre waves
+    bool isWaveActive = false;
 
-    [Header("Spawner Pòsitions")]
-    public List<Transform> relativeSpawnPoints;
 
     Transform player;
 
@@ -51,7 +50,7 @@ public class EnemySpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (currentWaveCount < waves.Count && waves[currentWaveCount].spawnCount == 0)  //checa se a wave acabou para a proxima comecar
+        if (currentWaveCount < waves.Count && waves[currentWaveCount].spawnCount == 0 && !isWaveActive)  //checa se a wave acabou para a proxima comecar
         {
             StartCoroutine(BeginNextWave());
         }
@@ -66,12 +65,14 @@ public class EnemySpawner : MonoBehaviour
 
     IEnumerator BeginNextWave()
     {
+        isWaveActive = true;
         //cooldown entre waves
         yield return new WaitForSeconds(waveInterval);
 
         //se tem mais waves depois da atual, segue para a proxima
         if(currentWaveCount < waves.Count - 1)
         {
+            isWaveActive = false;
             currentWaveCount++;
             CalculateWaveQuota();
         }
@@ -101,31 +102,33 @@ public class EnemySpawner : MonoBehaviour
                 //checa se a qtd mínima desse tipo de inimigo foi spawnado
                 if(enemyGroup.spawnCount < enemyGroup.enemyCount)
                 {   
-                    //limitador de inimigos que podem estar spawnados
-                    if (enemiesAlive > maxEnemiesAllowed)
-                    {
-                        maxEnemiesReached = true;
-                        return;
-                    }
                     Vector2 spawnPosition = new Vector2(player.transform.position.x + Random.Range(-10f, 10f), player.transform.position.y + Random.Range(-10f, 10f));
                     Instantiate(enemyGroup.enemyPrefab, spawnPosition, Quaternion.identity);
 
                     enemyGroup.spawnCount++;
                     waves[currentWaveCount].spawnCount++;
                     enemiesAlive++;
+
+                    //limitador de inimigos que podem estar spawnados
+                    if (enemiesAlive > maxEnemiesAllowed)
+                    {
+                        maxEnemiesReached = true;
+                        return;
+                    }
                 }
             }
-        }
-        //reset caso a qtd de inimigos vivos ficou abaixo do limite
-        if (enemiesAlive < maxEnemiesAllowed)
-        {
-            maxEnemiesReached = false;
         }
     }
 
     public void OnEnemyKilled()
     {
         enemiesAlive--;
+
+         //reset caso a qtd de inimigos vivos ficou abaixo do limite
+        if (enemiesAlive < maxEnemiesAllowed)
+        {
+            maxEnemiesReached = false;
+        }
     }
 
 }

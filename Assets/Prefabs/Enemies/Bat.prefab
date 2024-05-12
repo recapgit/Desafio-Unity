@@ -199,4 +199,8 @@ MonoBehaviour:
   - name: Exp Gem
     itemPrefab: {fileID: 4096779284381846897, guid: a4252448576f877429e622caa36b3748,
       type: 3}
-    dropRate: 100
+    dropRate: 75
+  - name: Exp Gem
+    itemPrefab: {fileID: 4096779284381846897, guid: b8de1d1f0f7878d42bf432389fea7b20,
+      type: 3}
+    dropRate: 25

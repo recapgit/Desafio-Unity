@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4843097648840699031}
   - component: {fileID: 2655808602103117383}
   - component: {fileID: -2205433810340695932}
+  - component: {fileID: 7993651528165036513}
   m_Layer: 0
   m_Name: Red Bat
   m_TagString: Enemy
@@ -78,7 +79,7 @@ SpriteRenderer:
   m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: -668673865, guid: 3dd9994934ea37b4d882c93e67eae3da, type: 3}
-  m_Color: {r: 0.9339623, g: 0.2511125, b: 0.2511125, a: 1}
+  m_Color: {r: 0.9528302, g: 0.38203096, b: 0.38203096, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -166,7 +167,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a57d95f77a41fe40a497cd622797a41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyData: {fileID: 11400000, guid: 80905a0a14ed8274daea4a0b8fedaaa9, type: 2}
 --- !u!114 &-2205433810340695932
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -180,3 +180,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyData: {fileID: 11400000, guid: f8d2444190650da4cadd4d32228675c5, type: 2}
+  currentMoveSpeed: 0
+  currentHealth: 0
+  currentDamage: 0
+--- !u!114 &7993651528165036513
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 949838582628969972}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f732f2d5112ca64db128382249031eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  drops:
+  - name: Green Gem
+    itemPrefab: {fileID: 4096779284381846897, guid: b8de1d1f0f7878d42bf432389fea7b20,
+      type: 3}
+    dropRate: 70
+  - name: Purple Gem
+    itemPrefab: {fileID: 4096779284381846897, guid: 89ed717262c32b344b5ca2662c1a5d35,
+      type: 3}
+    dropRate: 10

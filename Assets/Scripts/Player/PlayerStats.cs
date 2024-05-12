@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
+using UnityEngine.UI;
 
 public class PlayerStats : MonoBehaviour
 {
@@ -20,6 +22,12 @@ public class PlayerStats : MonoBehaviour
     public float invincibilityDuration;
     float invincibilityTimer;
     bool isInvincible;
+
+    [Header("UI")]
+    public Image healthBar;
+    public Image expBar;
+    public TextMeshProUGUI levelText;
+
 
     //EXP
     //Sistema de níveis do jogo. O jogador coleta exp e se pegar suficiente aumenta o nivel e carrega o que sobrou de exp para o proximo nivel
@@ -57,6 +65,9 @@ public class PlayerStats : MonoBehaviour
     void Start()
     {
         expLimit = levelRanges[0].expLimitIncrease;
+        UpdateHealthBar();
+        UpdateExpBar();
+        UpdateLevelText();
     }
 
     
@@ -64,6 +75,7 @@ public class PlayerStats : MonoBehaviour
     {
         exp += quantidade;
         LevelUpChecker();
+        UpdateExpBar();
     }
 
     void LevelUpChecker()
@@ -84,6 +96,8 @@ public class PlayerStats : MonoBehaviour
                 }
             }
             expLimit += expLimitIncrease;
+            
+            UpdateLevelText();
         }
     }
 
@@ -104,6 +118,17 @@ public class PlayerStats : MonoBehaviour
         Recover();
     }
 
+    void UpdateExpBar()
+    {
+        expBar.fillAmount = (float)exp / expLimit;
+    }
+
+    void UpdateLevelText()
+    {
+        levelText.text = "Lv. " + level.ToString();
+    }
+
+
     public void TakeDamage(float dmg)
     {
         if (!isInvincible)
@@ -117,24 +142,36 @@ public class PlayerStats : MonoBehaviour
             {
                 Kill();
             }
+            
+            UpdateHealthBar();
         }
     }
 
-    public void RestoreHealth(float amount)
+    // public void RestoreHealth(float amount)
+    // {
+    //     if (currentHealth < characterData.MaxHealth)
+    //     {
+    //         currentHealth += amount;
+    //         if(currentHealth > characterData.MaxHealth)
+    //         {
+    //             currentHealth = characterData.MaxHealth;
+    //         }
+    //     }
+    //     UpdateHealthBar();
+    // }
+
+    void UpdateHealthBar()
     {
-        if (currentHealth < characterData.MaxHealth)
-        {
-            currentHealth += amount;
-            if(currentHealth > characterData.MaxHealth)
-            {
-                currentHealth = characterData.MaxHealth;
-            }
-        }
+        healthBar.fillAmount = currentHealth / characterData.MaxHealth;
     }
 
     public void Kill()
     {
-        Debug.Log("Morreu");
+        if (!GameManager.instance.isGameOver)
+        {
+            GameManager.instance.AssignLevelReachedUI(level);
+            GameManager.instance.GameOver();
+        }
     }
 
     void Recover()
@@ -143,6 +180,8 @@ public class PlayerStats : MonoBehaviour
         {
             currentHealth += currentRecovery * Time.deltaTime;
 
+            UpdateHealthBar();
+            
             if(currentHealth > characterData.MaxHealth)
             {
                 currentHealth = characterData.MaxHealth;
